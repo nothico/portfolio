@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>C.A | Frontend Engineer Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Noto+Sans+JP:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f5f7fa;
+      --bg2: #ffffff;
+      --bg3: #eef1f6;
+      --border: rgba(60, 90, 180, 0.12);
+      --accent: #3b6ef5;
+      --accent2: #6a9bff;
+      --accent-light: #e8effe;
+      --text: #1a1f36;
+      --text-muted: #5a6480;
+      --text-dim: #a0a8c0;
+      --font-display: 'Cormorant Garamond', serif;
+      --font-body: 'Noto Sans JP', sans-serif;
+      --font-mono: 'DM Mono', monospace;
+      --shadow: 0 4px 24px rgba(59, 110, 245, 0.10);
+      --shadow-lg: 0 8px 40px rgba(59, 110, 245, 0.15);
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-weight: 300;
+      line-height: 1.8;
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.2rem 4rem;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      box-shadow: 0 2px 16px rgba(59, 110, 245, 0.06);
+    }
+
+    .nav-logo {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 0.05em;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+
+    /* HERO */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 8rem 4rem 4rem;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, #eef3ff 0%, #f5f7fa 50%, #e8f0ff 100%);
+    }
+
+    .hero-bg-circle {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(60px);
+      pointer-events: none;
+    }
+
+    .hero-bg-circle.c1 {
+      width: 500px;
+      height: 500px;
+      background: rgba(59, 110, 245, 0.12);
+      top: -100px;
+      right: -50px;
+    }
+
+    .hero-bg-circle.c2 {
+      width: 350px;
+      height: 350px;
+      background: rgba(106, 155, 255, 0.10);
+      bottom: 0;
+      left: 30%;
+    }
+
+    .hero-content {
+      position: relative;
+      max-width: 720px;
+    }
+
+    .hero-name {
+      font-family: var(--font-display);
+      font-size: clamp(4.5rem, 9vw, 8rem);
+      font-weight: 300;
+      line-height: 1;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      margin-bottom: 1.2rem;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.4s forwards;
+    }
+
+    .hero-name span {
+      color: var(--accent);
+    }
+
+    .hero-tagline {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      margin-bottom: 2.8rem;
+      max-width: 500px;
+      line-height: 2;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.6s forwards;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.8s forwards;
+    }
+
+    /* BUTTONS */
+    .btn {
+      display: inline-block;
+      padding: 0.85rem 2.2rem;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.3s;
+      cursor: pointer;
+      border: none;
+      border-radius: 2px;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      box-shadow: 0 4px 16px rgba(59, 110, 245, 0.35);
+    }
+
+    .btn-primary:hover {
+      background: var(--accent2);
+      box-shadow: 0 6px 24px rgba(59, 110, 245, 0.45);
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--accent);
+      border: 1.5px solid var(--accent);
+    }
+
+    .btn-outline:hover {
+      background: var(--accent-light);
+      transform: translateY(-2px);
+    }
+
+    /* SECTION COMMON */
+    section {
+      padding: 7rem 4rem;
+    }
+
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.6rem;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 4vw, 3rem);
+      font-weight: 400;
+      color: var(--text);
+      margin-bottom: 0.8rem;
+      line-height: 1.2;
+    }
+
+    .divider {
+      width: 48px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      border-radius: 2px;
+      margin-bottom: 3rem;
+    }
+
+    /* ABOUT */
+    #about {
+      background: var(--bg2);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 6rem;
+      align-items: start;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .about-text {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 2;
+      margin-bottom: 1.5rem;
+    }
+
+    .about-text strong {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .about-stats {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .stat-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1rem 1.2rem;
+    }
+
+    .stat-icon {
+      width: 36px;
+      height: 36px;
+      background: var(--accent-light);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 1rem;
+    }
+
+    .stat-label {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    .stat-label strong {
+      color: var(--text);
+      font-weight: 500;
+      display: block;
+      font-size: 0.9rem;
+      margin-bottom: 0.2rem;
+    }
+
+    /* SKILLS */
+    #skills {
+      background: var(--bg);
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.2rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .skill-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1.6rem;
+      box-shadow: var(--shadow);
+      transition: box-shadow 0.3s, transform 0.3s;
+    }
+
+    .skill-card:hover {
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-4px);
+    }
+
+    .skill-card-label {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      padding-bottom: 0.7rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .skill-tag {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      padding: 0.25rem 0.75rem;
+      border-radius: 2px;
+    }
+
+    /* WORKS */
+    #works {
+      background: var(--bg3);
+    }
+
+    .works-container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .works-featured {
+      margin-bottom: 2rem;
+    }
+
+    .works-grid-sub {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+    }
+
+    .work-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: box-shadow 0.3s, transform 0.3s;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .work-card:hover {
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-5px);
+    }
+
+    .work-featured-thumb {
+      background: linear-gradient(135deg, #dce8ff 0%, #c2d5ff 100%);
+      padding: 5rem 5rem;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      gap: 6rem;
+      overflow: hidden;
+    }
+
+    .mockup-set {
+      display: flex;
+      align-items: flex-end;
+      gap: 2rem;
+      position: relative;
+    }
+
+    .mockup-pc {
+      width: 480px;
+      height: 300px;
+      background: #fff;
+      border: 3px solid #2c3e50;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+      position: relative;
+    }
+
+    .mockup-pc img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .mockup-pc::after {
+      content: '';
+      position: absolute;
+      bottom: -16px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 130px;
+      height: 10px;
+      background: #2c3e50;
+      border-radius: 0 0 6px 6px;
+    }
+
+    .mockup-mobile {
+      width: 130px;
+      height: 250px;
+      background: #fff;
+      border: 3px solid #2c3e50;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+      position: absolute;
+      right: -55px;
+      bottom: 15px;
+    }
+
+    .mockup-mobile img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .work-featured-body {
+      padding: 2rem 2.5rem;
+    }
+
+    /* Sub (横並び2枚) */
+    .work-sub-thumb {
+      padding: 3rem 2rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+      min-height: 280px;
+    }
+
+    .work-sub-thumb.t2 {
+      background: linear-gradient(135deg, #d4f0e8 0%, #b3e4d4 100%);
+    }
+
+    .work-sub-thumb.t3 {
+      background: linear-gradient(135deg, #ffe8d4 0%, #ffd0b0 100%);
+    }
+
+    .mockup-set-sm {
+      display: flex;
+      align-items: flex-end;
+      gap: 1rem;
+      position: relative;
+    }
+
+    .mockup-pc-sm {
+      width: 320px;
+      height: 200px;
+      background: #fff;
+      border: 3px solid #2c3e50;
+      border-radius: 6px;
+      overflow: hidden;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+      position: relative;
+    }
+
+    .mockup-pc-sm img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .mockup-pc-sm::after {
+      content: '';
+      position: absolute;
+      bottom: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 90px;
+      height: 7px;
+      background: #2c3e50;
+      border-radius: 0 0 4px 4px;
+    }
+
+    .mockup-mobile-sm {
+      width: 95px;
+      height: 180px;
+      background: #fff;
+      border: 2px solid #2c3e50;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+      position: absolute;
+      right: -38px;
+      bottom: 10px;
+    }
+
+    .mockup-mobile-sm img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .work-body {
+      padding: 1.8rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .work-category {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .work-title {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 400;
+      color: var(--text);
+      margin-bottom: 0.8rem;
+    }
+
+    .work-desc {
+      font-size: 0.87rem;
+      color: var(--text-muted);
+      line-height: 1.9;
+      flex: 1;
+      margin-bottom: 1.4rem;
+    }
+
+    .work-tech {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1.4rem;
+    }
+
+    .tech-tag {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: var(--accent);
+      background: var(--accent-light);
+      border: 1px solid rgba(59, 110, 245, 0.2);
+      padding: 0.2rem 0.65rem;
+      border-radius: 2px;
+    }
+
+    .work-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.2rem;
+      align-items: center;
+    }
+
+    .work-link {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: gap 0.2s;
+    }
+
+    .work-link:hover {
+      gap: 0.8rem;
+    }
+
+    .work-link::after {
+      content: '→';
+    }
+
+    .work-login-info {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      color: var(--text-muted);
+      background: var(--bg3);
+      padding: 0.2rem 0.6rem;
+      border-radius: 2px;
+      border: 1px solid var(--border);
+    }
+
+    /* GitHubリンク */
+    .work-github-row {
+      margin-top: 1.2rem;
+      padding-top: 1.2rem;
+      border-top: 1px dashed var(--border);
+    }
+
+    .work-github-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #fff;
+      background: #1a1f36;
+      text-decoration: none;
+      padding: 0.6rem 1.2rem;
+      border-radius: 3px;
+      transition: background 0.3s, transform 0.2s;
+    }
+
+    .work-github-link:hover {
+      background: #2c3e50;
+      transform: translateY(-2px);
+    }
+
+    .work-github-icon {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+    }
+
+    /* CONTACT */
+    #contact {
+      background: linear-gradient(135deg, #eef3ff 0%, #f5f7fa 100%);
+      text-align: center;
+    }
+
+    .contact-inner {
+      max-width: 560px;
+      margin: 0 auto;
+    }
+
+    .contact-text {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-bottom: 3rem;
+      line-height: 2;
+    }
+
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+    }
+
+    /* FOOTER */
+    footer {
+      padding: 2rem 4rem;
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      text-align: center;
+    }
+
+    .footer-copy {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      color: var(--text-dim);
+    }
+
+    /* ANIMATION */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s, transform 0.7s;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 1200px) {
+      .work-featured-thumb {
+        gap: 5rem;
+        padding: 4rem 2rem;
+      }
+
+      .mockup-pc {
+        width: 380px;
+        height: 240px;
+      }
+
+      .mockup-mobile {
+        width: 110px;
+        height: 210px;
+        right: -45px;
+      }
+
+      .mockup-pc-sm {
+        width: 260px;
+        height: 165px;
+      }
+
+      .mockup-mobile-sm {
+        width: 80px;
+        height: 150px;
+        right: -32px;
+      }
+    }
+
+    @media (max-width: 960px) {
+      .work-featured-thumb {
+        gap: 3rem;
+        padding: 3rem 1.5rem;
+      }
+
+      .mockup-pc {
+        width: 300px;
+        height: 190px;
+      }
+
+      .mockup-mobile {
+        width: 90px;
+        height: 170px;
+        right: -36px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        padding: 1rem 1.5rem;
+      }
+
+      .nav-links {
+        gap: 1.5rem;
+      }
+
+      section {
+        padding: 5rem 1.5rem;
+      }
+
+      #hero {
+        padding: 7rem 1.5rem 4rem;
+      }
+
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+
+      .works-grid-sub {
+        grid-template-columns: 1fr;
+      }
+
+      .work-featured-thumb {
+        gap: 4rem;
+        padding: 4rem 2rem;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .mockup-set {
+        width: 75%;
+        max-width: 360px;
+      }
+
+      .mockup-pc {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 16 / 10;
+      }
+
+      .mockup-mobile {
+        width: 22%;
+        height: auto;
+        aspect-ratio: 9 / 17;
+        right: -8%;
+        bottom: 8%;
+      }
+
+      .mockup-set-sm {
+        width: 75%;
+        max-width: 360px;
+      }
+
+      .mockup-pc-sm {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 16 / 10;
+      }
+
+      .mockup-mobile-sm {
+        width: 22%;
+        height: auto;
+        aspect-ratio: 9 / 17;
+        right: -8%;
+        bottom: 8%;
+      }
+
+      footer {
+        padding: 1.5rem 1rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#hero" class="nav-logo">C.A</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#works">Works</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-bg-circle c1"></div>
+    <div class="hero-bg-circle c2"></div>
+    <div class="hero-content">
+      <h1 class="hero-name">C<span>.</span>A</h1>
+      <p class="hero-tagline">
+        実務経験とリスキリングで、フロントエンドへ。<br>
+        好奇心を原動力に、常に学び続けるエンジニアです。
+      </p>
+      <div class="hero-cta">
+        <a href="#works" class="btn btn-primary">Works を見る</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="reveal">
+      <p class="section-label">About</p>
+      <h2 class="section-title">自己紹介</h2>
+      <div class="divider"></div>
+    </div>
+    <div class="about-grid">
+      <div class="reveal">
+        <div class="about-stats">
+          <div class="stat-item">
+            <div class="stat-icon">💼</div>
+            <div class="stat-label">
+              <strong>実務経験あり</strong>
+              WEBコーダー・PHPプログラマー
+            </div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-icon">📚</div>
+            <div class="stat-label">
+              <strong>スキルアップ</strong>
+              PHP / WordPress（追加授業）<br>
+              JavaScript / Vue.js（現在学習中）
+            </div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-icon">📝</div>
+            <div class="stat-label">
+              <strong>WordPress ブログ運営中</strong>
+              自作テーマで継続運営
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="reveal" style="transition-delay:0.15s">
+        <p class="about-text">
+          <strong>WEBコーダー・PHPプログラマー</strong>としての実務経験を持ち、結婚を機に第一線を退いた後も、WordPressで自作テーマのブログを運営するなど、<strong>WEBと関わり続けて</strong>きました。
+        </p>
+        <p class="about-text">
+          その後、職業訓練校にてリスキリングを行い、フロントエンド技術を体系的に学び直しました。卒業後は学校でPHP・WordPressの追加授業も受講し、現在はJavaScriptとVue.jsを独学で学習中です。
+        </p>
+        <p class="about-text">
+          新しい技術への好奇心を原動力に、日々成長し続けることをモットーとしています。IllustratorやPhotoshopを使ったデザインワークの経験も活かし、デザイナーの意図を汲み取ったコーディングが可能です。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <p class="section-label reveal">Skills</p>
+    <h2 class="section-title reveal">技術スキル</h2>
+    <div class="divider reveal"></div>
+    <div class="skills-grid">
+      <div class="skill-card reveal">
+        <p class="skill-card-label">Frontend</p>
+        <div class="skill-tags">
+          <span class="skill-tag">HTML</span>
+          <span class="skill-tag">CSS</span>
+          <span class="skill-tag">JavaScript</span>
+          <span class="skill-tag">Vue.js</span>
+        </div>
+      </div>
+      <div class="skill-card reveal" style="transition-delay:0.1s">
+        <p class="skill-card-label">Backend</p>
+        <div class="skill-tags">
+          <span class="skill-tag">PHP</span>
+          <span class="skill-tag">MySQL</span>
+          <span class="skill-tag">XAMPP</span>
+        </div>
+      </div>
+      <div class="skill-card reveal" style="transition-delay:0.2s">
+        <p class="skill-card-label">CMS</p>
+        <div class="skill-tags">
+          <span class="skill-tag">WordPress</span>
+          <span class="skill-tag">自作テーマ</span>
+        </div>
+      </div>
+      <div class="skill-card reveal" style="transition-delay:0.3s">
+        <p class="skill-card-label">Design Tools</p>
+        <div class="skill-tags">
+          <span class="skill-tag">Illustrator</span>
+          <span class="skill-tag">Photoshop</span>
+        </div>
+      </div>
+      <div class="skill-card reveal" style="transition-delay:0.4s">
+        <p class="skill-card-label">Others</p>
+        <div class="skill-tags">
+          <span class="skill-tag">Git</span>
+          <span class="skill-tag">GitHub</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORKS -->
+  <section id="works">
+    <p class="section-label reveal">Works</p>
+    <h2 class="section-title reveal">制作実績</h2>
+    <div class="divider reveal"></div>
+    <div class="works-container">
+
+      <!-- Featured (1段目) -->
+      <div class="work-card reveal works-featured">
+        <div class="work-featured-thumb">
+          <div class="mockup-set">
+            <div class="mockup-pc"><img src="images/cat-master-pc.png" alt="猫マスター ユーザー画面"></div>
+            <div class="mockup-mobile"><img src="images/cat-master-sp.png" alt="猫マスター スマホ画面"></div>
+          </div>
+          <div class="mockup-set">
+            <div class="mockup-pc"><img src="images/cat-master-admin.png" alt="猫マスター 管理画面"></div>
+          </div>
+        </div>
+        <div class="work-featured-body">
+          <p class="work-category">独学 / 自主制作</p>
+          <h3 class="work-title">CHOCOTA CAFE - 猫スタッフ管理システム</h3>
+          <p class="work-desc">
+            架空の猫カフェのWebサイト＋管理者向けCRUDシステム。Vue.jsとSupabaseを組み合わせ、スタッフ猫の登録・編集・削除・公開設定をリアルタイムにフロントへ反映できる構成にしました。画像アップロードや認証機能も実装しています。
+          </p>
+          <div class="work-tech">
+            <span class="tech-tag">Vue.js</span>
+            <span class="tech-tag">JavaScript</span>
+            <span class="tech-tag">Supabase</span>
+            <span class="tech-tag">EmailJS</span>
+            <span class="tech-tag">HTML</span>
+            <span class="tech-tag">CSS</span>
+          </div>
+          <div class="work-links">
+            <a href="https://cat-master-chi.vercel.app/" target="_blank" class="work-link">サイトを見る</a>
+            <a href="https://cat-master-chi.vercel.app/login" target="_blank" class="work-link">管理画面</a>
+            <span class="work-login-info">ID: admin / PASS: catpass</span>
+          </div>
+          <div class="work-github-row">
+            <a href="https://github.com/nothico/cat-master" target="_blank" class="work-github-link">
+              <svg class="work-github-icon" viewBox="0 0 24 24">
+                <path
+                  d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.8 10.9.6.1.8-.3.8-.6v-2.2c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.3.8-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2.9-.3 2-.4 3-.4s2 .1 3 .4c2.3-1.5 3.3-1.2 3.3-1.2.7 1.6.2 2.8.1 3.1.7.8 1.2 1.8 1.2 3.1 0 4.5-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6 4.5-1.5 7.8-5.8 7.8-10.9C23.5 5.7 18.3.5 12 .5z" />
+              </svg>
+              GitHubでソースコードを見る
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sub (2段目) -->
+      <div class="works-grid-sub">
+        <div class="work-card reveal">
+          <div class="work-sub-thumb t2">
+            <div class="mockup-set-sm">
+              <div class="mockup-pc-sm"><img src="images/silva-pc.png" alt="SILVA Resort PC画面"></div>
+              <div class="mockup-mobile-sm"><img src="images/silva-sp.png" alt="SILVA Resort スマホ画面"></div>
+            </div>
+          </div>
+          <div class="work-body">
+            <p class="work-category">職業訓練校 / 個人制作</p>
+            <h3 class="work-title">SILVA Resort - グランピング施設サイト</h3>
+            <p class="work-desc">
+              架空のグランピング施設のWebサイト。職業訓練校での個人制作課題として、デザインからコーディングまで一人で担当しました。jQueryを使ったアニメーションや、ターゲットを意識したデザインに仕上げました。
+            </p>
+            <div class="work-tech">
+              <span class="tech-tag">HTML</span>
+              <span class="tech-tag">CSS</span>
+              <span class="tech-tag">JavaScript</span>
+              <span class="tech-tag">jQuery</span>
+            </div>
+            <div class="work-links">
+              <a href="https://nothico.github.io/SILVAResorthub/" target="_blank" class="work-link">サイトを見る</a>
+            </div>
+          </div>
+        </div>
+        <div class="work-card reveal" style="transition-delay:0.1s">
+          <div class="work-sub-thumb t3">
+            <div class="mockup-set-sm">
+              <div class="mockup-pc-sm"><img src="images/mogu-pc.png" alt="Mogu PC画面"></div>
+              <div class="mockup-mobile-sm"><img src="images/mogu-sp.png" alt="Mogu スマホ画面"></div>
+            </div>
+          </div>
+          <div class="work-body">
+            <p class="work-category">職業訓練校 / グループ制作</p>
+            <h3 class="work-title">Mogu - 料理教室サイト</h3>
+            <p class="work-desc">
+              架空の料理教室サイト。職業訓練校でのチーム制作課題で、共通部（ヘッダー・フッター）と、トップページ、予約フォームページの2ページを担当しました。デザインの統一感を保つため、メンバーと密に連携しながら進めました。
+            </p>
+            <div class="work-tech">
+              <span class="tech-tag">HTML</span>
+              <span class="tech-tag">CSS</span>
+              <span class="tech-tag">JavaScript</span>
+              <span class="tech-tag">jQuery</span>
+            </div>
+            <div class="work-links">
+              <a href="https://nothico.github.io/Mogu/" target="_blank" class="work-link">サイトを見る</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="contact-inner">
+      <p class="section-label reveal">Contact</p>
+      <h2 class="section-title reveal">お問い合わせ</h2>
+      <div class="divider reveal" style="margin: 0 auto 2.5rem;"></div>
+      <p class="contact-text reveal">
+        ご連絡はこちらのメールアドレスよりお気軽にお問い合わせください。
+      </p>
+      <div class="contact-links reveal">
+        <a href="mailto:portfolio.ca1979@gmail.com" class="btn btn-primary">メールを送る</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p class="footer-copy">© 2025 C.A</p>
+  </footer>
+
+  <script>
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => observer.observe(el));
+  </script>
+</body>
+
+</html>
